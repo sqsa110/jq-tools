@@ -1,6 +1,6 @@
 (function($){
 
-  function CookieOper(key,value,time){
+  function CookieOper(){
 
   }
 
@@ -119,8 +119,8 @@
 
   $.extend({
     cookieOper : function(key,value,time){
-      var aaa = new CookieOper(key,value,time);
-      return aaa.init(key,value,time);;
+      var cookies = new CookieOper();
+      return cookies.init(key,value,time);;
     }
   });
 })($);
