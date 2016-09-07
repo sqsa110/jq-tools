@@ -1,5 +1,5 @@
-# jq-cookie
-操作说明
+# jq-cookie \n
+操作说明  \n
 //设置cookie aa值为bb
   $.cookieOper('aa','bb');
 //设置cookie bb值为cc  dd值为ee  ff值为gg
