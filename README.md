@@ -23,10 +23,14 @@
 ##操作说明
 ###例如：http://www.a.com?a=b&c=d
 * 读取所有
+
   $.getSearch();    //  {a:"b",c:"d"}
 * 读取某一个
+
   $.getSearch('a');  // "b"
 * 读取数组
+
   $.getSearch(['c','a']);  // ["d","b"]
 * 读取数组，返回对象
+
   $.getSearch(['c','a'],true);  // {a:"b",c:"d"}
