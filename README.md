@@ -1,6 +1,7 @@
-# jq-cookie
+# jq-tools
 ===
-#操作说明<br> 
+##jq-cookie
+##操作说明<br> 
 //设置cookie aa值为bb<br> 
   $.cookieOper('aa','bb');<br> 
 //设置cookie bb值为cc  dd值为ee  ff值为gg<br> 
@@ -17,3 +18,15 @@
   $.cookieOper(['bb','dd'],true);<br> 
 //删除cookie aa的值<br> 
   $.cookieOper('aa',true);<br> 
+
+##jq-getSearch
+##操作说明
+###例如：http://www.a.com?a=b&c=d
+* 读取所有
+  $.getSearch();    //  {a:"b",c:"d"}
+* 读取某一个
+  $.getSearch('a');  // "b"
+* 读取数组
+  $.getSearch(['c','a']);  // ["d","b"]
+* 读取数组，返回对象
+  $.getSearch(['c','a'],true);  // {a:"b",c:"d"}
