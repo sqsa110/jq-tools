@@ -1,0 +1,91 @@
+	(function($){
+  
+    function Search(){
+        this.searchData = window.location.search;
+    }
+    
+    Search.prototype.init = function(opt,off){
+        this.data = this.select();
+        this.opt = opt;
+        this.off = off;
+        var data = this.checkOpt();
+        return data;
+    }
+    
+    Search.prototype.checkOpt = function(){
+    	var optType = Object.prototype.toString.call(this.opt);	
+		  if (optType == '[object String]') {
+    		return this.strFn();
+    	} else if (optType == '[object Array]' && !this.off) {
+			return this.arrFn();
+    	} else if (optType == '[object Array]' && this.off) {
+    		return this.objFn();
+    	} else {
+			return this.data;
+    	}
+    }
+    
+    Search.prototype.objFn = function(){
+    	var obj = {};
+    	for (var i=0,maxi=this.opt.length;i<maxi;i++) {
+    		obj[this.opt[i]] = this.data[this.opt[i]];
+    	}
+    	return obj;
+    }
+    
+    Search.prototype.strFn = function(){
+    	return this.data[this.opt];
+    }
+    
+    Search.prototype.arrFn = function(){
+    	var arr = [];
+    	for (var i=0,maxi=this.opt.length;i<maxi;i++) {
+    		arr.push(this.data[this.opt[i]]);
+    	}
+    	return arr;
+    }
+    
+    Search.prototype.select = function(){
+        var search = this.searchData;
+        var searchArr;
+        var searchObj = {};
+        var arr;
+        var test;
+        if (search) {
+
+            search = search.substring(1);
+            if (search.indexOf('&')<0) { 
+                searchObj = this.division(search);
+            } else {
+                searchArr = search.split('&');
+                for (var i=0,maxi=searchArr.length;i<maxi;i++) {
+                    test = this.division(searchArr[i]);
+                    for (var j in test) {
+                        searchObj[j] = test[j];
+                    }
+                }
+            }
+        }
+        return searchObj;
+    }
+    
+    Search.prototype.division = function(str){
+        var arr;
+        var obj = {};
+        if (str.indexOf('=')>0) {  
+            arr = str.split('=');
+            if (arr.length === 2) {
+                obj[arr[0]] = arr[1];
+            }
+        }
+        return obj;
+    }
+    
+    $.extend({
+        getSearch : function(opt,off){
+          var getSearch = new Search();
+          return getSearch.init(opt,off);
+        }
+    });
+    
+})($)
